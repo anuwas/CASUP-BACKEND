@@ -5,6 +5,7 @@ import java.util.List;
 
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,6 +20,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.ca.supportlog.domain.entity.Item;
 import com.ca.supportlog.repository.ItemRepository;
+import com.ca.supportlog.service.ItemService;
 
 @RestController
 @CrossOrigin(origins="http://localhost:4200")
@@ -26,10 +28,13 @@ import com.ca.supportlog.repository.ItemRepository;
 public class ItemController {
 	@Autowired
 	private ItemRepository itemRepository;
+	
+	@Autowired
+	private ItemService itemService;
 
 	@GetMapping("/item")
-	public List<Item> retrieveAllStudents() {
-		return itemRepository.findAll();
+	public Page<Item> retrieveAllStudents() {
+		return itemService.getAllItem();
 	}
 
 	@GetMapping("/item/{id}")

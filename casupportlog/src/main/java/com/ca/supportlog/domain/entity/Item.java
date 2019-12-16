@@ -60,7 +60,31 @@ public class Item implements Serializable{
 	  private Date itemCloseDate;
 	  
 	  @Temporal(TemporalType.TIMESTAMP)
-	  @Column(name = "item_created_timestamp")
+	  @Column(name = "item_created_timestamp",insertable = false, updatable = false)
 	  private Date itemCreatedTimestamp;
+	  
+	  @Column(name = "application_name")
+	  private String applicationName;
+	  
+	  @Column(name = "priority")
+	  private int priority;
+	  
+	  @Column(name = "aged",insertable = false)
+	  private String aged;
+	  
+	  @Column(name = "bounce",insertable = false)
+	  private int bounce;
+	  
+	  @Column(name = "primary_sla_breached",insertable = false)
+	  private String primarySlaBreached;
+	 
+	  @Column(name = "secondary_sla_breached",insertable = false)
+	  private String secondarySlaBreached;
+	 
+	  @Column(name = "tertiry_sla_breached",insertable = false)
+	  private String tertirySlaBreached;
+	 
+	  @Column(name = "resoluation",insertable = false)
+	  private String resoluation;
 
 }

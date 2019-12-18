@@ -1,6 +1,7 @@
 package com.ca.supportlog.domain.entity;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -10,6 +11,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -52,7 +54,7 @@ public class Item implements Serializable{
 	  
 	  @Column(name = "associated_item")
 	  private String associatedItem;
-	  
+	  	  
 	  @Column(name = "item_created_date")
 	  private Date itemCreatedDate;
 

@@ -1,8 +1,7 @@
 package com.ca.supportlog.domain.entity;
 
 import java.io.Serializable;
-import java.util.Calendar;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,8 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
-import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -49,21 +46,23 @@ public class Item implements Serializable{
 	  @Column(name = "item_description")
 	  private String itemDescription;
 	  
-	  @Column(name = "item_created_by")
-	  private String itemCreatedBy;
+	  @Column(name = "item_assigned")
+	  private String itemAssigned;
 	  
 	  @Column(name = "associated_item")
 	  private String associatedItem;
 	  	  
-	  @Column(name = "item_created_date")
-	  private Date itemCreatedDate;
+	  //@JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+	  
+	  @Column(name = "item_created_date",columnDefinition = "TIMESTAMP")
+	  private LocalDateTime itemCreatedDate;
 
-	  @Column(name = "item_close_date")
-	  private Date itemCloseDate;
+	  @Column(name = "item_close_date",columnDefinition = "TIMESTAMP")
+	  private LocalDateTime itemCloseDate;
 	  
 	  @Temporal(TemporalType.TIMESTAMP)
 	  @Column(name = "item_created_timestamp",insertable = false, updatable = false)
-	  private Date itemCreatedTimestamp;
+	  private java.util.Date itemCreatedTimestamp;
 	  
 	  @Column(name = "application_name")
 	  private String applicationName;

@@ -1,6 +1,8 @@
 package com.ca.supportlog.service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,34 +23,52 @@ public class ItemServiceImpl implements ItemService{
 	ItemRepository itemRepository;
 
 	@Override
-	public boolean saveStudent(Item items) {
-		// TODO Auto-generated method stub
-		return false;
+	public Item saveItem(Item item) {
+		return  itemRepository.save(item);
 	}
 
 	@Override
 	public Page<Item> getAllItem(int pageNumber) {
 		//Pageable pageable = PageRequest.of(pageNumber-1, 20, Sort.by("itemType").ascending().and(Sort.by("created_timestamp").descending()));
-		Pageable pageable = PageRequest.of(pageNumber-1, 20, Sort.by("itemCreatedTimestamp").descending());
+		Pageable pageable = PageRequest.of(pageNumber-1, 50, Sort.by("itemCreatedTimestamp").descending());
 		return itemRepository.findAll(pageable);
 	}
+	
+	@Override
+	public Page<Item> getAllItemByItemNumber(int pageNumber, long itenNumber) {
+		Pageable pageable = PageRequest.of(pageNumber-1, 50, Sort.by("itemCreatedTimestamp").descending());
+		return itemRepository.findByitemNumber(pageable,itenNumber);
+	}
+	
+	@Override
+	public void deleteItemById(long id) {
+		itemRepository.deleteById(id);
+	}
 
 	@Override
-	public boolean deleteStudent(Item items) {
+	public Item getItemByID(long id) {
+		Optional<Item> item = itemRepository.findById(id);
+		if (!item.isPresent())
+			System.out.println("item not found");
+
+		return item.get();
+	}
+
+	@Override
+	public boolean updateItemById(long id) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public List<Item> getStudentByID(Item items) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Item> getActiveItemList() {
+		List<String> itemList= new ArrayList<>();
+		itemList.add("closed");
+		itemList.add("resolved");
+		
+		return itemRepository.findByitemStatusNotIn(itemList);
 	}
 
-	@Override
-	public boolean updateStudent(Item items) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	
 
 }

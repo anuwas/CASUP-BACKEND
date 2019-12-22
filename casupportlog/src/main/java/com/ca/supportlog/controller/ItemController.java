@@ -35,29 +35,34 @@ public class ItemController {
 	@Autowired
 	private ItemService itemService;
 
-	@GetMapping("/itemlist/{pageNumber}")
-	public Page<Item> retrieveAllStudents(@PathVariable int pageNumber) {
+	@GetMapping("/all-item-list/{pageNumber}")
+	public Page<Item> retrieveAllItems(@PathVariable int pageNumber) {
 		return itemService.getAllItem(pageNumber);
+	}
+	
+	@GetMapping("/all-item-list/{pageNumber}/{itemNumber}")
+	public Page<Item> retrieveAllItems(@PathVariable int pageNumber,@PathVariable long itemNumber) {
+		return itemService.getAllItemByItemNumber(pageNumber, itemNumber);
+	}
+	
+	@GetMapping("/active-item-list")
+	public List<Item> retrieveAllActiveItems() {
+		return itemService.getActiveItemList();
 	}
 
 	@GetMapping("/item/{id}")
-	public Item retrieveStudent(@PathVariable long id) {
-		Optional<Item> student = itemRepository.findById(id);
-
-		if (!student.isPresent())
-			System.out.println("item not found");
-
-		return student.get();
+	public Item retrieveItem(@PathVariable long id) {
+		return itemService.getItemByID(id);	
 	}
 
 	@DeleteMapping("/item/{id}")
 	public void deleteStudent(@PathVariable long id) {
-		itemRepository.deleteById(id);
+		itemService.deleteItemById(id);
 	}
 
 	@PostMapping("/save-item")
 	public ResponseEntity<Object> createItem(@RequestBody Item item,UriComponentsBuilder builder) {
-		Item savedItem = itemRepository.save(item);
+		Item savedItem = itemService.saveItem(item);
 
 		/*
 		 * URI location =
@@ -74,11 +79,11 @@ public class ItemController {
 	}
 	
 	@PutMapping("/item/{id}")
-	public ResponseEntity<Object> updateStudent(@RequestBody Item item, @PathVariable long id) {
+	public ResponseEntity<Object> updateItem(@RequestBody Item item, @PathVariable long id) {
+		
+		Optional<Item> itemOptional = itemRepository.findById(id);
 
-		Optional<Item> studentOptional = itemRepository.findById(id);
-
-		if (!studentOptional.isPresent())
+		if (!itemOptional.isPresent())
 			return ResponseEntity.notFound().build();
 
 		item.setId(id);

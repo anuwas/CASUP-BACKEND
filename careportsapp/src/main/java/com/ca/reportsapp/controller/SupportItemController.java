@@ -22,6 +22,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.ca.reportsapp.domain.entity.SupportItem;
+import com.ca.reportsapp.domain.entity.SupportItemActivity;
 import com.ca.reportsapp.repository.SupportItemRepository;
 import com.ca.reportsapp.service.SupportItemService;
 
@@ -96,5 +97,27 @@ public class SupportItemController {
 		supportItemRepository.save(item);
 
 		return ResponseEntity.noContent().build();
+	}
+	
+	@PostMapping("/save-supitem-activity")
+	public ResponseEntity<Object> createSupItemActivity(@RequestBody SupportItemActivity supportItemActivity,UriComponentsBuilder builder) {
+		SupportItemActivity savedItem = supportItemService.saveSupportItemActivity(supportItemActivity);
+
+		/*
+		 * URI location =
+		 * ServletUriComponentsBuilder.fromCurrentRequest().path("/item/{id}")
+		 * .buildAndExpand(savedStudent.getId()).toUri();
+		 * 
+		 * return ResponseEntity.created(location).build();
+		 */
+		System.out.println(savedItem.getSupportItemActivityId());
+		HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(builder.path("item/{id}").buildAndExpand(savedItem.getSupportItemActivityId()).toUri());
+        return new ResponseEntity<Object>(headers,HttpStatus.CREATED);
+	}
+	
+	@GetMapping("/sup-item-activity-list/{itemId}")
+	public List<SupportItemActivity> retrieveSupportItemActivityByItemId(@PathVariable int itemId) {
+		return supportItemService.getSupportItemActivityList(itemId);
 	}
 }

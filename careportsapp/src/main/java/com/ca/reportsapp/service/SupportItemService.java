@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 
 import com.ca.reportsapp.domain.entity.SupportItem;
+import com.ca.reportsapp.domain.entity.SupportItemActivity;
 
 /**
  * @author Anupam Biswas
@@ -22,4 +23,6 @@ public interface SupportItemService {
 	public SupportItem getItemByID(long id);
 	public boolean updateItemById(long id);
 	public List<SupportItem> getActiveItemList();
+	public List<SupportItemActivity> getSupportItemActivityList(long itemId);
+	public SupportItemActivity saveSupportItemActivity(SupportItemActivity supportItemActivity);
 }

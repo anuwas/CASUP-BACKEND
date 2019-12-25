@@ -16,6 +16,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ca.reportsapp.domain.entity.SupportItem;
+import com.ca.reportsapp.domain.entity.SupportItemActivity;
+import com.ca.reportsapp.repository.SupportItemActivityRepository;
 import com.ca.reportsapp.repository.SupportItemRepository;
 
 /**
@@ -28,6 +30,9 @@ public class SupportItemServiceImpl implements SupportItemService{
 
 	@Autowired
 	SupportItemRepository supportItemRepository;
+	
+	@Autowired
+	SupportItemActivityRepository supportItemActivityRepository;
 
 	@Override
 	public SupportItem saveItem(SupportItem item) {
@@ -74,5 +79,15 @@ public class SupportItemServiceImpl implements SupportItemService{
 		itemList.add("resolved");
 		
 		return supportItemRepository.findByitemStatusNotIn(itemList);
+	}
+
+	@Override
+	public List<SupportItemActivity> getSupportItemActivityList(long itemId) {
+		return supportItemActivityRepository.findAllByitemId(itemId, Sort.by(Sort.Direction.DESC, "itemActivityDate"));
+	}
+
+	@Override
+	public SupportItemActivity saveSupportItemActivity(SupportItemActivity supportItemActivity) {
+		return supportItemActivityRepository.save(supportItemActivity);
 	}
 }

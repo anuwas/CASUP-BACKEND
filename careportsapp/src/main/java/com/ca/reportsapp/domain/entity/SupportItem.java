@@ -20,7 +20,7 @@ import lombok.ToString;
  */
 
 @Entity
-@Table(name = "ITEM")
+@Table(name = "support_item")
 @Getter
 @Setter
 @ToString

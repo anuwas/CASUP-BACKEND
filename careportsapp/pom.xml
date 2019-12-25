@@ -8,10 +8,10 @@
 		<version>2.2.2.BUILD-SNAPSHOT</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.ca.supportlog</groupId>
-	<artifactId>casupportlog</artifactId>
+	<groupId>com.ca.careportsapp</groupId>
+	<artifactId>careportsapp</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>casupportlog</name>
+	<name>careportsapp</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>

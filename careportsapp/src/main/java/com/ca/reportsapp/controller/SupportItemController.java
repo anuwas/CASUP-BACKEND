@@ -1,4 +1,4 @@
-package com.ca.supportlog.controller;
+package com.ca.reportsapp.controller;
 
 import java.net.URI;
 import java.util.List;
@@ -21,48 +21,53 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.ca.supportlog.domain.entity.Item;
-import com.ca.supportlog.repository.ItemRepository;
-import com.ca.supportlog.service.ItemService;
+import com.ca.reportsapp.domain.entity.SupportItem;
+import com.ca.reportsapp.repository.SupportItemRepository;
+import com.ca.reportsapp.service.SupportItemService;
 
+/**
+ * @author Anupam Biswas
+ * 2019-12-25 19:05:43.534
+ */
 @RestController
 @CrossOrigin(origins="http://localhost:4200")
 @RequestMapping(value="/api")
-public class ItemController {
-	@Autowired
-	private ItemRepository itemRepository;
+public class SupportItemController {
 	
 	@Autowired
-	private ItemService itemService;
+	private SupportItemRepository supportItemRepository;
+	
+	@Autowired
+	private SupportItemService supportItemService;
 
 	@GetMapping("/all-item-list/{pageNumber}")
-	public Page<Item> retrieveAllItems(@PathVariable int pageNumber) {
-		return itemService.getAllItem(pageNumber);
+	public Page<SupportItem> retrieveAllItems(@PathVariable int pageNumber) {
+		return supportItemService.getAllItem(pageNumber);
 	}
 	
 	@GetMapping("/all-item-list/{pageNumber}/{itemNumber}")
-	public Page<Item> retrieveAllItems(@PathVariable int pageNumber,@PathVariable long itemNumber) {
-		return itemService.getAllItemByItemNumber(pageNumber, itemNumber);
+	public Page<SupportItem> retrieveAllItems(@PathVariable int pageNumber,@PathVariable long itemNumber) {
+		return supportItemService.getAllItemByItemNumber(pageNumber, itemNumber);
 	}
 	
 	@GetMapping("/active-item-list")
-	public List<Item> retrieveAllActiveItems() {
-		return itemService.getActiveItemList();
+	public List<SupportItem> retrieveAllActiveItems() {
+		return supportItemService.getActiveItemList();
 	}
 
 	@GetMapping("/item/{id}")
-	public Item retrieveItem(@PathVariable long id) {
-		return itemService.getItemByID(id);	
+	public SupportItem retrieveItem(@PathVariable long id) {
+		return supportItemService.getItemByID(id);	
 	}
 
 	@DeleteMapping("/item/{id}")
 	public void deleteStudent(@PathVariable long id) {
-		itemService.deleteItemById(id);
+		supportItemService.deleteItemById(id);
 	}
 
 	@PostMapping("/save-item")
-	public ResponseEntity<Object> createItem(@RequestBody Item item,UriComponentsBuilder builder) {
-		Item savedItem = itemService.saveItem(item);
+	public ResponseEntity<Object> createItem(@RequestBody SupportItem item,UriComponentsBuilder builder) {
+		SupportItem savedItem = supportItemService.saveItem(item);
 
 		/*
 		 * URI location =
@@ -79,18 +84,17 @@ public class ItemController {
 	}
 	
 	@PutMapping("/item/{id}")
-	public ResponseEntity<Object> updateItem(@RequestBody Item item, @PathVariable long id) {
+	public ResponseEntity<Object> updateItem(@RequestBody SupportItem item, @PathVariable long id) {
 		
-		Optional<Item> itemOptional = itemRepository.findById(id);
+		Optional<SupportItem> itemOptional = supportItemRepository.findById(id);
 
 		if (!itemOptional.isPresent())
 			return ResponseEntity.notFound().build();
 
 		item.setId(id);
 		
-		itemRepository.save(item);
+		supportItemRepository.save(item);
 
 		return ResponseEntity.noContent().build();
 	}
-
 }

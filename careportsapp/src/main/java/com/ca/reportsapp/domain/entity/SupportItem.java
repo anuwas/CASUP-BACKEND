@@ -1,4 +1,4 @@
-package com.ca.supportlog.domain.entity;
+package com.ca.reportsapp.domain.entity;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -14,13 +14,17 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+/**
+ * @author Anupam Biswas
+ * 2019-12-25 19:18:36.648
+ */
 
 @Entity
 @Table(name = "ITEM")
 @Getter
 @Setter
 @ToString
-public class Item implements Serializable{
+public class SupportItem implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
@@ -87,5 +91,4 @@ public class Item implements Serializable{
 	 
 	  @Column(name = "resoluation",insertable = false)
 	  private String resoluation;
-
 }

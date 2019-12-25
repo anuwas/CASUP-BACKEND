@@ -1,4 +1,7 @@
-package com.ca.supportlog.service;
+/**
+ * 
+ */
+package com.ca.reportsapp.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,42 +15,46 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ca.supportlog.domain.entity.Item;
-import com.ca.supportlog.repository.ItemRepository;
+import com.ca.reportsapp.domain.entity.SupportItem;
+import com.ca.reportsapp.repository.SupportItemRepository;
 
+/**
+ * @author Anupam Biswas
+ * 2019-12-25 19:32:43.453
+ */
 @Service
 @Transactional
-public class ItemServiceImpl implements ItemService{
-	
+public class SupportItemServiceImpl implements SupportItemService{
+
 	@Autowired
-	ItemRepository itemRepository;
+	SupportItemRepository supportItemRepository;
 
 	@Override
-	public Item saveItem(Item item) {
-		return  itemRepository.save(item);
+	public SupportItem saveItem(SupportItem item) {
+		return  supportItemRepository.save(item);
 	}
 
 	@Override
-	public Page<Item> getAllItem(int pageNumber) {
+	public Page<SupportItem> getAllItem(int pageNumber) {
 		//Pageable pageable = PageRequest.of(pageNumber-1, 20, Sort.by("itemType").ascending().and(Sort.by("created_timestamp").descending()));
 		Pageable pageable = PageRequest.of(pageNumber-1, 50, Sort.by("itemCreatedTimestamp").descending());
-		return itemRepository.findAll(pageable);
+		return supportItemRepository.findAll(pageable);
 	}
 	
 	@Override
-	public Page<Item> getAllItemByItemNumber(int pageNumber, long itenNumber) {
+	public Page<SupportItem> getAllItemByItemNumber(int pageNumber, long itenNumber) {
 		Pageable pageable = PageRequest.of(pageNumber-1, 50, Sort.by("itemCreatedTimestamp").descending());
-		return itemRepository.findByitemNumber(pageable,itenNumber);
+		return supportItemRepository.findByitemNumber(pageable,itenNumber);
 	}
 	
 	@Override
 	public void deleteItemById(long id) {
-		itemRepository.deleteById(id);
+		supportItemRepository.deleteById(id);
 	}
 
 	@Override
-	public Item getItemByID(long id) {
-		Optional<Item> item = itemRepository.findById(id);
+	public SupportItem getItemByID(long id) {
+		Optional<SupportItem> item = supportItemRepository.findById(id);
 		if (!item.isPresent())
 			System.out.println("item not found");
 
@@ -61,14 +68,11 @@ public class ItemServiceImpl implements ItemService{
 	}
 
 	@Override
-	public List<Item> getActiveItemList() {
+	public List<SupportItem> getActiveItemList() {
 		List<String> itemList= new ArrayList<>();
 		itemList.add("closed");
 		itemList.add("resolved");
 		
-		return itemRepository.findByitemStatusNotIn(itemList);
+		return supportItemRepository.findByitemStatusNotIn(itemList);
 	}
-
-	
-
 }

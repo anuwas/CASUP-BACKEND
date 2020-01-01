@@ -58,11 +58,13 @@ public class SupportItem implements Serializable{
 	  	  
 	  //@JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
 	  
-	  @Column(name = "item_created_date",columnDefinition = "TIMESTAMP")
-	  private LocalDateTime itemCreatedDate;
+	  @Temporal(TemporalType.TIMESTAMP)
+	  @Column(name = "item_created_date")
+	  private java.util.Date itemCreatedDate;
 
-	  @Column(name = "item_close_date",columnDefinition = "TIMESTAMP")
-	  private LocalDateTime itemCloseDate;
+	  @Temporal(TemporalType.TIMESTAMP)
+	  @Column(name = "item_close_date")
+	  private java.util.Date itemCloseDate;
 	  
 	  @Temporal(TemporalType.TIMESTAMP)
 	  @Column(name = "item_created_timestamp",insertable = false, updatable = false)

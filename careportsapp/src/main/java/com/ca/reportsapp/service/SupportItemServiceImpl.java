@@ -75,8 +75,9 @@ public class SupportItemServiceImpl implements SupportItemService{
 	@Override
 	public List<SupportItem> getActiveItemList() {
 		List<String> itemList= new ArrayList<>();
-		itemList.add("closed");
-		itemList.add("resolved");
+		itemList.add("Closed");
+		itemList.add("Resolved");
+		itemList.add("Fulfilled");
 		
 		return supportItemRepository.findByitemStatusNotIn(itemList);
 	}

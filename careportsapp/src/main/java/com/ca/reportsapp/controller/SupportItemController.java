@@ -31,7 +31,7 @@ import com.ca.reportsapp.service.SupportItemService;
  * 2019-12-25 19:05:43.534
  */
 @RestController
-@CrossOrigin(origins="http://localhost:4200")
+@CrossOrigin(origins="${rest.client.origin}")
 @RequestMapping(value="/api")
 public class SupportItemController {
 	

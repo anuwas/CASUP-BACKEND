@@ -127,8 +127,8 @@ public class SupportItemController {
 		return supportItemService.getActiveReportItemList();
 	}
 	
-	@GetMapping("/adv-search-supitem/{pageNumber}/{advanceSearchSupportItem}")
-	public Page<SupportItem> retrieveAdvanceSearchSupportItem(@PathVariable int pageNumber,@PathVariable String advanceSearchSupportItem) {
-		return supportItemService.getAdvSrcSupportItem(advanceSearchSupportItem,pageNumber);
+	@GetMapping("/all-src-item-list/{page}/{srcsupitemstr}")
+	public Page<SupportItem> retrieveAdvanceSearchSupportItem(@PathVariable int page,@PathVariable String srcsupitemstr) {
+		return supportItemService.getAdvSrcSupportItem(srcsupitemstr,page);
 	}
 }

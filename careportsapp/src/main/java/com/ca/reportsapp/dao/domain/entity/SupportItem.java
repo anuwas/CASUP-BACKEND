@@ -1,7 +1,6 @@
-package com.ca.reportsapp.domain.entity;
+package com.ca.reportsapp.dao.domain.entity;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -93,4 +92,7 @@ public class SupportItem implements Serializable{
 	 
 	  @Column(name = "resoluation",insertable = false)
 	  private String resoluation;
+	  
+	  @Column(name = "cronical_report",insertable = false,updatable = false)
+	  private String cronicalReport;
 }

@@ -15,10 +15,15 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ca.reportsapp.domain.entity.SupportItem;
-import com.ca.reportsapp.domain.entity.SupportItemActivity;
-import com.ca.reportsapp.repository.SupportItemActivityRepository;
-import com.ca.reportsapp.repository.SupportItemRepository;
+import com.ca.reportsapp.dao.SupportItemActivityDAO;
+import com.ca.reportsapp.dao.SupportItemDAO;
+import com.ca.reportsapp.dao.domain.entity.SupportItem;
+import com.ca.reportsapp.dao.domain.entity.SupportItemActivity;
+import com.ca.reportsapp.dto.AdvanceSearchSupportItem;
+import com.ca.reportsapp.service.helper.SupportItemServiceHelper;
+import com.google.gson.Gson;
+
+
 
 /**
  * @author Anupam Biswas
@@ -29,37 +34,43 @@ import com.ca.reportsapp.repository.SupportItemRepository;
 public class SupportItemServiceImpl implements SupportItemService{
 
 	@Autowired
-	SupportItemRepository supportItemRepository;
+	SupportItemDAO supportItemDAO;
 	
 	@Autowired
-	SupportItemActivityRepository supportItemActivityRepository;
+	SupportItemActivityDAO supportItemActivityDAO;
+	
+	@Autowired
+	Gson gson;
+	
+	@Autowired
+	SupportItemServiceHelper supportItemServiceHelper;
 
 	@Override
 	public SupportItem saveItem(SupportItem item) {
-		return  supportItemRepository.save(item);
+		return  supportItemDAO.save(item);
 	}
 
 	@Override
 	public Page<SupportItem> getAllItem(int pageNumber) {
 		//Pageable pageable = PageRequest.of(pageNumber-1, 20, Sort.by("itemType").ascending().and(Sort.by("created_timestamp").descending()));
 		Pageable pageable = PageRequest.of(pageNumber-1, 50, Sort.by("itemCreatedTimestamp").descending());
-		return supportItemRepository.findAll(pageable);
+		return supportItemDAO.findAll(pageable);
 	}
 	
 	@Override
 	public Page<SupportItem> getAllItemByItemNumber(int pageNumber, long itenNumber) {
 		Pageable pageable = PageRequest.of(pageNumber-1, 50, Sort.by("itemCreatedTimestamp").descending());
-		return supportItemRepository.findByitemNumber(pageable,itenNumber);
+		return supportItemDAO.findByitemNumber(pageable,itenNumber);
 	}
 	
 	@Override
 	public void deleteItemById(long id) {
-		supportItemRepository.deleteById(id);
+		supportItemDAO.deleteById(id);
 	}
 
 	@Override
 	public SupportItem getItemByID(long id) {
-		Optional<SupportItem> item = supportItemRepository.findById(id);
+		Optional<SupportItem> item = supportItemDAO.findById(id);
 		if (!item.isPresent())
 			System.out.println("item not found");
 
@@ -79,16 +90,37 @@ public class SupportItemServiceImpl implements SupportItemService{
 		itemList.add("Resolved");
 		itemList.add("Fulfilled");
 		
-		return supportItemRepository.findByitemStatusNotIn(itemList);
+		return supportItemDAO.findByitemStatusNotInAndcronicalReportIn(itemList,"N");
 	}
 
 	@Override
 	public List<SupportItemActivity> getSupportItemActivityList(long itemId) {
-		return supportItemActivityRepository.findAllByitemId(itemId, Sort.by(Sort.Direction.DESC, "itemActivityDate"));
+		return supportItemActivityDAO.findAllByitemId(itemId, Sort.by(Sort.Direction.DESC, "itemActivityDate"));
 	}
 
 	@Override
 	public SupportItemActivity saveSupportItemActivity(SupportItemActivity supportItemActivity) {
-		return supportItemActivityRepository.save(supportItemActivity);
+		return supportItemActivityDAO.save(supportItemActivity);
+	}
+
+	@Override
+	public List<SupportItem> getActiveReportItemList() {
+		return supportItemDAO.findBycronicalReport("Y");
+	}
+
+	@Override
+	public Page<SupportItem> getAdvSrcSupportItem(String advanceSearchSupportItem,int pageNumber) {
+		// TODO Auto-generated method stub
+		System.out.println(advanceSearchSupportItem);
+		
+		AdvanceSearchSupportItem advSrcAttributes = gson.fromJson(advanceSearchSupportItem, AdvanceSearchSupportItem.class);
+		System.out.println(advSrcAttributes);
+		//List<SupportItem> srcitem = supportItemServiceHelper.retrieveSupportItem(advSrcAttributes);
+		Pageable pageable = PageRequest.of(pageNumber-1, 50);
+		Page<SupportItem> srcitem = supportItemServiceHelper.retrieveAdvSrcSupportItemPage(advSrcAttributes,pageable);
+		
+		//System.out.println(srcitem);
+		return srcitem;
+		//return null;
 	}
 }

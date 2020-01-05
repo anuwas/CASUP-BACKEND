@@ -1,16 +1,15 @@
 /**
  * 
  */
-package com.ca.reportsapp.repository;
+package com.ca.reportsapp.dao.repository;
 
-import java.util.List;
 
-import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
-import com.ca.reportsapp.domain.entity.SupportItemActivity;
+import com.ca.reportsapp.dao.domain.entity.SupportItemActivity;
+
+
 
 /**
  * @author Anupam Biswas
@@ -18,5 +17,5 @@ import com.ca.reportsapp.domain.entity.SupportItemActivity;
  */
 @Repository
 public interface SupportItemActivityRepository extends PagingAndSortingRepository<SupportItemActivity, Long>{
-	List<SupportItemActivity> findAllByitemId(long itemId,Sort sort);
+	
 }

@@ -45,8 +45,9 @@ CREATE TABLE `support_item` (
   `resoluation` text,
   `rfc_number` double DEFAULT NULL,
   `tower_name` varchar(45) NOT NULL DEFAULT 'Java',
+  `cronical_report` varchar(45) NOT NULL DEFAULT 'N',
   PRIMARY KEY (`item_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=154 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=150 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -62,7 +63,7 @@ CREATE TABLE `support_item_activity` (
   `item_activity` text,
   `item_activity_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`support_item_activity_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -74,4 +75,4 @@ CREATE TABLE `support_item_activity` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-01-02  1:37:56
+-- Dump completed on 2020-01-06  0:23:01

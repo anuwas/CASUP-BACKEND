@@ -21,9 +21,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.ca.reportsapp.domain.entity.SupportItem;
-import com.ca.reportsapp.domain.entity.SupportItemActivity;
-import com.ca.reportsapp.repository.SupportItemRepository;
+import com.ca.reportsapp.dao.domain.entity.SupportItem;
+import com.ca.reportsapp.dao.domain.entity.SupportItemActivity;
+import com.ca.reportsapp.dao.repository.SupportItemRepository;
+import com.ca.reportsapp.dto.AdvanceSearchSupportItem;
 import com.ca.reportsapp.service.SupportItemService;
 
 /**
@@ -119,5 +120,15 @@ public class SupportItemController {
 	@GetMapping("/sup-item-activity-list/{itemId}")
 	public List<SupportItemActivity> retrieveSupportItemActivityByItemId(@PathVariable int itemId) {
 		return supportItemService.getSupportItemActivityList(itemId);
+	}
+	
+	@GetMapping("/sup-item-active-report-list")
+	public List<SupportItem> retrieveSupportItemActiveReport() {
+		return supportItemService.getActiveReportItemList();
+	}
+	
+	@GetMapping("/adv-search-supitem/{pageNumber}/{advanceSearchSupportItem}")
+	public Page<SupportItem> retrieveAdvanceSearchSupportItem(@PathVariable int pageNumber,@PathVariable String advanceSearchSupportItem) {
+		return supportItemService.getAdvSrcSupportItem(advanceSearchSupportItem,pageNumber);
 	}
 }

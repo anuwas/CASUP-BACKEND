@@ -7,8 +7,11 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 
-import com.ca.reportsapp.domain.entity.SupportItem;
-import com.ca.reportsapp.domain.entity.SupportItemActivity;
+import com.ca.reportsapp.dao.domain.entity.SupportItem;
+import com.ca.reportsapp.dao.domain.entity.SupportItemActivity;
+import com.ca.reportsapp.dto.AdvanceSearchSupportItem;
+
+
 
 /**
  * @author Anupam Biswas
@@ -23,6 +26,8 @@ public interface SupportItemService {
 	public SupportItem getItemByID(long id);
 	public boolean updateItemById(long id);
 	public List<SupportItem> getActiveItemList();
+	public List<SupportItem> getActiveReportItemList();
 	public List<SupportItemActivity> getSupportItemActivityList(long itemId);
 	public SupportItemActivity saveSupportItemActivity(SupportItemActivity supportItemActivity);
+	public Page<SupportItem> getAdvSrcSupportItem(String advanceSearchSupportItem,int pageNumber); 
 }

@@ -1,4 +1,4 @@
-package com.ca.reportsapp.domain.entity;
+package com.ca.reportsapp.dao.domain.entity;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -9,8 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -95,4 +95,30 @@ public class SupportItem implements Serializable{
 	  
 	  @Column(name = "cronical_report",insertable = false,updatable = false)
 	  private String cronicalReport;
+	  
+	  @Column(name = "revised_tower")
+	  private String revisedTower;
+	  
+	  @Temporal(TemporalType.TIMESTAMP)
+	  @Column(name = "aged_on_date",insertable = false, updatable = true)
+	  private java.util.Date agedOnDate;
+	  
+	  @Column(name = "breach_justification")
+	  private String breachJustification;
+	  
+	  @Column(name = "aged_justification")
+	  private String agedJustification;
+	  
+	  @Column(name = "debt_class")
+	  private String debtClass;
+	  
+	  @Column(name = "debt_type")
+	  private String debtType;
+	  
+	  @Column(name = "debt_remedial_mechanism")
+	  private String debtRemedialMechanism;
+	  
+	  @Temporal(TemporalType.TIMESTAMP)
+	  @Column(name = "modified_datetime",insertable = false, updatable = false)
+	  private java.util.Date modifiedDatetime;
 }

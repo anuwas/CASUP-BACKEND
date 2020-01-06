@@ -22,8 +22,8 @@ import lombok.ToString;
 public class AdvanceSearchSupportItem {
 	
 	private long itemNumber;
-    private Date itemCreatedDate;
-    private Date itemCloseDate;
+    private Date itemFromDate;
+    private Date itemToDate;
     private boolean opneDate;
     private boolean closeDate;
     private String applicationName;

@@ -76,6 +76,20 @@ public class SupportItemServiceHelper {
 		 * predicates.add(builder.like(builder.lower(booksRoot.get("name")), "%" +
 		 * params.getName().toLowerCase() + "%"));
 		 */
+        if(filter.isOpneDate() && filter.isCloseDate()) {		
+        	predicates.add(builder.or(builder.between(supportItemRoot.get("itemCreatedDate"), filter.getItemFromDate(), filter.getItemToDate()), 
+        					builder.between(supportItemRoot.get("itemCloseDate"), filter.getItemFromDate(), filter.getItemToDate())));		
+        }
+        
+        if(filter.isOpneDate() && !filter.isCloseDate()) {
+        	predicates.add(builder.between(supportItemRoot.get("itemCreatedDate"), filter.getItemFromDate(), filter.getItemToDate()));
+        }
+        
+        if(!filter.isOpneDate() && filter.isCloseDate()) {
+        	predicates.add(builder.between(supportItemRoot.get("itemCloseDate"), filter.getItemFromDate(), filter.getItemToDate()));
+        }
+        
+        
         if (filter.getItemNumber() != 0) {
 			  predicates.add(builder.equal(supportItemRoot.get("itemNumber"), filter.getItemNumber())); 
 		}
@@ -87,6 +101,39 @@ public class SupportItemServiceHelper {
         if (filter.getItemStatus() != null) {
 			  predicates.add(builder.equal(supportItemRoot.get("itemStatus"), filter.getItemStatus())); 
 		}
+        
+        if (filter.isBounce()) {
+			  predicates.add(builder.greaterThan(supportItemRoot.get("itemStatus"), 0)); 
+		}
+        
+        if (filter.getItemType() != null) {
+			  predicates.add(builder.equal(supportItemRoot.get("itemType"), filter.getItemType())); 
+		}
+        
+        if (filter.getItemAssigned() != null) {
+			  predicates.add(builder.equal(supportItemRoot.get("itemAssigned"), filter.getItemAssigned())); 
+		}
+        
+        if (filter.getSla() != null) {
+        	switch(filter.getSla())	{
+        	case "NonAged":
+        		predicates.add(builder.equal(supportItemRoot.get("aged"), "N")); 
+        		break;
+        	case "Aged":
+        		predicates.add(builder.equal(supportItemRoot.get("aged"), "Y")); 
+        		break;
+        	case "Primary":
+        		predicates.add(builder.equal(supportItemRoot.get("primarySlaBreached"), "Y")); 
+        		break;
+        	case "Secondary":
+        		predicates.add(builder.equal(supportItemRoot.get("secondarySlaBreached"), "Y")); 
+        		break;
+        	case "Tertiary":
+        		predicates.add(builder.equal(supportItemRoot.get("tertirySlaBreached"), "Y")); 
+        		break;
+        	}
+		}
+        
 
         criteria.where(builder.and(predicates.toArray( new Predicate[predicates.size()])));
 

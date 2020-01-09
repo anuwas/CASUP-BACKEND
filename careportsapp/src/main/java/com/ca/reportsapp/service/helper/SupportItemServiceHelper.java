@@ -76,6 +76,8 @@ public class SupportItemServiceHelper {
 		 * predicates.add(builder.like(builder.lower(booksRoot.get("name")), "%" +
 		 * params.getName().toLowerCase() + "%"));
 		 */
+        /*
+         * Mysql so jali it dosent suppot inclusive between
         if(filter.isOpneDate() && filter.isCloseDate()) {		
         	predicates.add(builder.or(builder.between(supportItemRoot.get("itemCreatedDate"), filter.getItemFromDate(), filter.getItemToDate()), 
         					builder.between(supportItemRoot.get("itemCloseDate"), filter.getItemFromDate(), filter.getItemToDate())));		
@@ -88,7 +90,21 @@ public class SupportItemServiceHelper {
         if(!filter.isOpneDate() && filter.isCloseDate()) {
         	predicates.add(builder.between(supportItemRoot.get("itemCloseDate"), filter.getItemFromDate(), filter.getItemToDate()));
         }
+        */
         
+        if(filter.isOpneDate() && filter.isCloseDate()) {		
+        	predicates.add(builder.or(builder.and(builder.greaterThanOrEqualTo(supportItemRoot.get("itemCreatedDate"), filter.getItemFromDate()), builder.lessThanOrEqualTo(supportItemRoot.get("itemCreatedDate"), filter.getItemToDate())), 
+        			builder.and(builder.greaterThanOrEqualTo(supportItemRoot.get("itemCloseDate"), filter.getItemFromDate()), builder.lessThanOrEqualTo(supportItemRoot.get("itemCloseDate"), filter.getItemToDate()))));
+        }
+        
+        
+        if(filter.isOpneDate() && !filter.isCloseDate()) {
+        	predicates.add(builder.and(builder.greaterThanOrEqualTo(supportItemRoot.get("itemCreatedDate"), filter.getItemFromDate()), builder.lessThanOrEqualTo(supportItemRoot.get("itemCreatedDate"), filter.getItemToDate())));
+        }
+        
+        if(!filter.isOpneDate() && filter.isCloseDate()) {
+        	predicates.add(builder.and(builder.greaterThanOrEqualTo(supportItemRoot.get("itemCloseDate"), filter.getItemFromDate()), builder.lessThanOrEqualTo(supportItemRoot.get("itemCloseDate"), filter.getItemToDate())));
+        }
         
         if (filter.getItemNumber() != 0) {
 			  predicates.add(builder.equal(supportItemRoot.get("itemNumber"), filter.getItemNumber())); 

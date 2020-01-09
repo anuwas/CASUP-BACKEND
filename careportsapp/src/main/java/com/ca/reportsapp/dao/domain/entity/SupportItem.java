@@ -121,4 +121,5 @@ public class SupportItem implements Serializable{
 	  @Temporal(TemporalType.TIMESTAMP)
 	  @Column(name = "modified_datetime",insertable = false, updatable = false)
 	  private java.util.Date modifiedDatetime;
+	  
 }

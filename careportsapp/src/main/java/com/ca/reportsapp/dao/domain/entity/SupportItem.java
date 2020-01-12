@@ -25,9 +25,9 @@ import lombok.ToString;
 @ToString
 public class SupportItem implements Serializable{
 
-	private static final long serialVersionUID = 1L;
-	
-	  @Id
+	private static final long serialVersionUID = -8842676110867055903L;
+
+	@Id
 	  @Column(name = "item_id")
 	  private long id;
 	  

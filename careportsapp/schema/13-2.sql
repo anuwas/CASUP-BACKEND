@@ -16,6 +16,94 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `dev_daily_scrum`
+--
+
+DROP TABLE IF EXISTS `dev_daily_scrum`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `dev_daily_scrum` (
+  `daily_scrum_id` int(11) NOT NULL,
+  `sprint_id` int(11) DEFAULT NULL,
+  `dev_item_id` varchar(45) DEFAULT NULL,
+  `current_status` text,
+  `developer_name` varchar(45) DEFAULT NULL,
+  `tester_name` varchar(45) DEFAULT NULL,
+  `status_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`daily_scrum_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `dev_item`
+--
+
+DROP TABLE IF EXISTS `dev_item`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `dev_item` (
+  `dev_item_id` int(11) NOT NULL AUTO_INCREMENT,
+  `item_parent_id` int(11) NOT NULL DEFAULT '0',
+  `item_number` varchar(45) DEFAULT NULL,
+  `item_type` varchar(45) DEFAULT NULL,
+  `item_sub_type` varchar(45) DEFAULT NULL,
+  `item_status` varchar(45) DEFAULT NULL,
+  `item_sprint_id` int(11) NOT NULL DEFAULT '0',
+  `item_sprint_name` varchar(45) DEFAULT NULL,
+  `item_sprint_status` varchar(45) DEFAULT NULL,
+  `item_sprint_status_comment` text,
+  `item_subject` varchar(145) DEFAULT NULL,
+  `item_description` text,
+  `item_acceptance_ctriteria` text,
+  `item_epic_name` varchar(45) DEFAULT NULL,
+  `item_current_board` varchar(45) DEFAULT NULL,
+  `application_name` varchar(45) DEFAULT NULL,
+  `is_refined` varchar(45) DEFAULT NULL,
+  `refine_date` varchar(45) DEFAULT NULL,
+  `refine_comment` text,
+  `link_item` varchar(45) DEFAULT NULL,
+  `link_comment` text,
+  `developer_name` varchar(45) DEFAULT NULL,
+  `tester_name` varchar(45) DEFAULT NULL,
+  `onboared_sprint` varchar(45) DEFAULT NULL,
+  `delivered_sprint` varchar(45) DEFAULT NULL,
+  `delivery_status` varchar(45) DEFAULT NULL,
+  `item_sys_release_date` date DEFAULT NULL,
+  `item_qa_release_date` date DEFAULT NULL,
+  `item_uat_release_date` date DEFAULT NULL,
+  `item_uat_rfc` varchar(45) DEFAULT NULL,
+  `item_prd_release_date` date DEFAULT NULL,
+  `item_prd_rfc` varchar(45) DEFAULT NULL,
+  `item_uat_bug_count` int(11) DEFAULT '0',
+  `item_prd_bug_count` int(11) DEFAULT '0',
+  `project_name` varchar(45) DEFAULT NULL,
+  `item_created_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`dev_item_id`),
+  UNIQUE KEY `item_uat_bug_number_UNIQUE` (`item_uat_bug_count`),
+  UNIQUE KEY `item_prd_bug_number_UNIQUE` (`item_prd_bug_count`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `dev_sprint`
+--
+
+DROP TABLE IF EXISTS `dev_sprint`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `dev_sprint` (
+  `sprint_id` int(11) NOT NULL AUTO_INCREMENT,
+  `sprint_name` varchar(45) DEFAULT NULL,
+  `sprint_open_date` date DEFAULT NULL,
+  `sprint_close_date` date DEFAULT NULL,
+  `total_story_point` int(11) DEFAULT NULL,
+  `deliverd_story_point` int(11) DEFAULT NULL,
+  `sprint_created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`sprint_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `support_item`
 --
 
@@ -56,7 +144,7 @@ CREATE TABLE `support_item` (
   `debt_estimate` varchar(45) DEFAULT NULL,
   `modified_datetime` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`item_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=152 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=155 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -84,4 +172,4 @@ CREATE TABLE `support_item_activity` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-01-07  1:45:33
+-- Dump completed on 2020-01-15  1:20:43

@@ -79,6 +79,9 @@ public class DevItem implements Serializable{
 	 @Column(name = "application_name")
 	  private String applicationName;
 	 
+	 @Column(name = "item_priority")
+	  private String itemPriority;
+	 
 	 @Column(name = "is_refined")
 	  private String isRefined;
 	 

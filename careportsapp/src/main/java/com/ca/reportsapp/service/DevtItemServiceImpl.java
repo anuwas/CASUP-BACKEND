@@ -59,4 +59,9 @@ public class DevtItemServiceImpl implements DevtItemService{
 		return srcitem;
 	}
 
+	@Override
+	public DevItem saveItem(DevItem item) {
+		return devItemDAO.save(item);
+	}
+
 }

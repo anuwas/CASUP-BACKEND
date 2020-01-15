@@ -58,6 +58,7 @@ CREATE TABLE `dev_item` (
   `item_epic_name` varchar(45) DEFAULT NULL,
   `item_current_board` varchar(45) DEFAULT NULL,
   `application_name` varchar(45) DEFAULT NULL,
+  `item_priority` varchar(45) DEFAULT NULL,
   `is_refined` varchar(45) DEFAULT NULL,
   `refine_date` varchar(45) DEFAULT NULL,
   `refine_comment` text,
@@ -81,7 +82,7 @@ CREATE TABLE `dev_item` (
   PRIMARY KEY (`dev_item_id`),
   UNIQUE KEY `item_uat_bug_number_UNIQUE` (`item_uat_bug_count`),
   UNIQUE KEY `item_prd_bug_number_UNIQUE` (`item_prd_bug_count`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -172,4 +173,4 @@ CREATE TABLE `support_item_activity` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-01-15  1:20:43
+-- Dump completed on 2020-01-16  0:56:56

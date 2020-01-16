@@ -45,8 +45,10 @@ CREATE TABLE `dev_item` (
   `dev_item_id` int(11) NOT NULL AUTO_INCREMENT,
   `item_parent_id` int(11) NOT NULL DEFAULT '0',
   `item_number` varchar(45) DEFAULT NULL,
+  `parent_item` varchar(45) DEFAULT NULL,
   `item_type` varchar(45) DEFAULT NULL,
   `item_sub_type` varchar(45) DEFAULT NULL,
+  `item_story_point` int(11) NOT NULL DEFAULT '0',
   `item_status` varchar(45) DEFAULT NULL,
   `item_sprint_id` int(11) NOT NULL DEFAULT '0',
   `item_sprint_name` varchar(45) DEFAULT NULL,
@@ -82,7 +84,7 @@ CREATE TABLE `dev_item` (
   PRIMARY KEY (`dev_item_id`),
   UNIQUE KEY `item_uat_bug_number_UNIQUE` (`item_uat_bug_count`),
   UNIQUE KEY `item_prd_bug_number_UNIQUE` (`item_prd_bug_count`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -173,4 +175,4 @@ CREATE TABLE `support_item_activity` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-01-16  0:56:56
+-- Dump completed on 2020-01-17  1:25:38

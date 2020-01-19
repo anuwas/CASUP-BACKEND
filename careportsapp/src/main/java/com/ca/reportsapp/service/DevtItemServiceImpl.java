@@ -3,6 +3,8 @@
  */
 package com.ca.reportsapp.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -14,6 +16,7 @@ import com.ca.reportsapp.dao.DevItemDAO;
 import com.ca.reportsapp.dao.DevSprintDAO;
 import com.ca.reportsapp.dao.domain.entity.DevItem;
 import com.ca.reportsapp.dao.domain.entity.DevSprint;
+import com.ca.reportsapp.dao.domain.entity.SupportItem;
 import com.ca.reportsapp.dto.DevItemSrcRequest;
 import com.ca.reportsapp.service.helper.DevItemServiceHelper;
 import com.google.gson.Gson;
@@ -62,6 +65,15 @@ public class DevtItemServiceImpl implements DevtItemService{
 	@Override
 	public DevItem saveItem(DevItem item) {
 		return devItemDAO.save(item);
+	}
+
+	@Override
+	public DevItem getItemByID(long devItemId) {
+		Optional<DevItem> item = devItemDAO.findById(devItemId);
+		if (!item.isPresent())
+			System.out.println("item not found");
+
+		return item.get();
 	}
 
 }

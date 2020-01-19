@@ -36,7 +36,7 @@ public class SupportItemServiceHelper {
 	@Autowired
 	EntityManager em;
 	
-	public List<SupportItem> retrieveAdvSrcSupportItemPage(AdvanceSearchSupportItem filter) {
+	public List<SupportItem> retrieveAdvSrcSupportItemForExcell(AdvanceSearchSupportItem filter,String type) {
 		return supportItemRepository.findAll(new Specification<SupportItem>() {
 
 			@Override

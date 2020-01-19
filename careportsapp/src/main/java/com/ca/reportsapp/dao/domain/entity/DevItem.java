@@ -40,8 +40,14 @@ public class DevItem implements Serializable{
 	 @Column(name = "item_number")
 	  private String itemNumber;
 	 
+	 @Column(name = "parent_item")
+	  private String parentItem;	 
+	 
 	 @Column(name = "item_type")
 	  private String itemType;
+	 
+	 @Column(name = "item_story_point")
+	  private long itemStoryPoint;
 	 
 	 @Column(name = "item_sub_type")
 	  private String itemSubType;

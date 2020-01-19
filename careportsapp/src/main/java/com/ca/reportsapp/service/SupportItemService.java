@@ -29,5 +29,6 @@ public interface SupportItemService {
 	public List<SupportItem> getActiveReportItemList();
 	public List<SupportItemActivity> getSupportItemActivityList(long itemId);
 	public SupportItemActivity saveSupportItemActivity(SupportItemActivity supportItemActivity);
-	public Page<SupportItem> getAdvSrcSupportItem(String advanceSearchSupportItem,int pageNumber); 
+	public Page<SupportItem> getAdvSrcSupportItem(String advanceSearchSupportItem,int pageNumber);
+	public List<SupportItem> getSupportItemForExcel(String advanceSearchSupportItem,String type);
 }

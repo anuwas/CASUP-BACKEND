@@ -131,4 +131,9 @@ public class SupportItemController {
 	public Page<SupportItem> retrieveAdvanceSearchSupportItem(@PathVariable int page,@PathVariable String srcsupitemstr) {
 		return supportItemService.getAdvSrcSupportItem(srcsupitemstr,page);
 	}
+	
+	@GetMapping("/all-src-item-list-excel-export/{srcsupitemstr}/{type}")
+	public List<SupportItem> retrieveAdvanceSearchSupportItemExcelExport(@PathVariable String srcsupitemstr,@PathVariable String type) {
+		return supportItemService.getSupportItemForExcel(srcsupitemstr,type);
+	}
 }

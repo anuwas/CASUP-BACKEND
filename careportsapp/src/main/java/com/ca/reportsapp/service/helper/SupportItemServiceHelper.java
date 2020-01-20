@@ -50,10 +50,10 @@ public class SupportItemServiceHelper {
 				 * predicates.add(cb.equal(root.get("designation"), filter.getDesignation())); }
 				 */
 
-				  if (filter.getApplicationName() != null) {
+				  if (!filter.getApplicationName().equals("All")) {
 				  predicates.add(cb.equal(root.get("applicationName"), filter.getApplicationName())); }
 				 
-				  if (filter.getItemStatus() != null) {
+				  if (!filter.getItemStatus().equals("All")) {
 					  predicates.add(cb.equal(root.get("itemStatus"), filter.getItemStatus())); }
 				
 				return cb.and(predicates.toArray(new Predicate[0]));
@@ -110,11 +110,11 @@ public class SupportItemServiceHelper {
 			  predicates.add(builder.equal(supportItemRoot.get("itemNumber"), filter.getItemNumber())); 
 		}
         
-        if (filter.getApplicationName() != null) {
+        if (!filter.getApplicationName().equals("All")) {
 			  predicates.add(builder.equal(supportItemRoot.get("applicationName"), filter.getApplicationName())); 
 		}
         
-        if (filter.getItemStatus() != null) {
+        if (!filter.getItemStatus().equals("All")) {
 			  predicates.add(builder.equal(supportItemRoot.get("itemStatus"), filter.getItemStatus())); 
 		}
         
@@ -122,15 +122,15 @@ public class SupportItemServiceHelper {
 			  predicates.add(builder.greaterThan(supportItemRoot.get("itemStatus"), 0)); 
 		}
         
-        if (filter.getItemType() != null) {
+        if (!filter.getItemType().equals("All")) {
 			  predicates.add(builder.equal(supportItemRoot.get("itemType"), filter.getItemType())); 
 		}
         
-        if (filter.getItemAssigned() != null) {
+        if (!filter.getItemAssigned().equals("All")) {
 			  predicates.add(builder.equal(supportItemRoot.get("itemAssigned"), filter.getItemAssigned())); 
 		}
         
-        if (filter.getSla() != null) {
+        if (!filter.getSla().equals("All")) {
         	switch(filter.getSla())	{
         	case "NonAged":
         		predicates.add(builder.equal(supportItemRoot.get("aged"), "N")); 

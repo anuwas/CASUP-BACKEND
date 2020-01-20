@@ -40,36 +40,36 @@ public class DevItemServiceHelper {
 
 		
         
-        if (filter.getItemNumber() != null) {
+        if (filter.getItemNumber()!=null) {
 			  predicates.add(builder.equal(supportItemRoot.get("itemNumber"), filter.getItemNumber())); 
 		}
         
-        if (filter.getApplicationName() != null) {
+        if (!filter.getApplicationName().equals("All")) {
 			  predicates.add(builder.equal(supportItemRoot.get("applicationName"), filter.getApplicationName())); 
 		}
         
-        if (filter.getItemStatus() != null) {
+        if (!filter.getItemStatus().equals("All")) {
 			  predicates.add(builder.equal(supportItemRoot.get("itemStatus"), filter.getItemStatus())); 
 		}
         
-        if (filter.getItemSprintName() != null) {
+        if (!filter.getItemSprintName().equals("All")) {
 			  predicates.add(builder.equal(supportItemRoot.get("itemSprintName"), filter.getItemSprintName())); 
 		}
         
-        if (filter.getItemType() != null) {
+        if (!filter.getItemType().equals("All")) {
 			  predicates.add(builder.equal(supportItemRoot.get("itemType"), filter.getItemType())); 
 		}
         
-        if (filter.getDeveloperName() != null) {
+        if (!filter.getDeveloperName().equals("All")) {
 			  predicates.add(builder.equal(supportItemRoot.get("developerName"), filter.getDeveloperName())); 
 		}
         
-        if (filter.getTesterName() != null) {
-			  predicates.add(builder.equal(supportItemRoot.get("testerName"), filter.getTesterName())); 
+        if (!filter.getProjectName().equals("All")) {
+			  predicates.add(builder.equal(supportItemRoot.get("projectName"), filter.getProjectName())); 
 		}
         
-        if (filter.getProjectName() != null) {
-			  predicates.add(builder.equal(supportItemRoot.get("projectName"), filter.getProjectName())); 
+        if (filter.isRefined()) {
+			  predicates.add(builder.equal(supportItemRoot.get("isRefined"), "Y")); 
 		}
         
        

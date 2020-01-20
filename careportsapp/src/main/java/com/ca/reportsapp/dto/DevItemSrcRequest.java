@@ -22,13 +22,12 @@ import lombok.ToString;
 public class DevItemSrcRequest {
 	
 	private String itemNumber;
-	private String itemType;
-	private String itemStatus;
 	private String itemSprintName;
-	private String itemSprintStatus;
-	private String itemCurrentBoard;
+	private String itemStatus;
 	private String applicationName;
-	private String developerName;
-	private String testerName;
+	private String itemPriority;
+	private boolean isRefined;
 	private String projectName;
+	private String itemType;
+	private String developerName;	
 }

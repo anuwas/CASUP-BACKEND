@@ -29,5 +29,7 @@ public class DevItemSrcRequest {
 	private boolean isRefined;
 	private String projectName;
 	private String itemType;
-	private String developerName;	
+	private String developerName;
+	private boolean task;
+	private boolean subTask;
 }

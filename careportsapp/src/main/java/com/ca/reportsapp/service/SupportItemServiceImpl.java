@@ -89,6 +89,8 @@ public class SupportItemServiceImpl implements SupportItemService{
 		itemList.add("Closed");
 		itemList.add("Resolved");
 		itemList.add("Fulfilled");
+		itemList.add("Cancel");
+		
 		
 		return supportItemDAO.findByitemStatusNotInAndcronicalReportIn(itemList,"N");
 	}

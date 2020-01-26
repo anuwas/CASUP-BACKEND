@@ -38,9 +38,13 @@ public class DevItemServiceHelper {
         Root<DevItem> supportItemRoot = criteria.from(DevItem.class);
         List<Predicate> predicates = new ArrayList<Predicate>();
 
-        if (filter.getItemNumber()!=null) {
+        if (filter.getItemNumber()!=null && !filter.isTask() && !filter.isSubTask()) {
 			predicates.add(builder.equal(supportItemRoot.get("itemNumber"), filter.getItemNumber())); 
 		}
+        
+        if(filter.getItemNumber()!=null && filter.isSubTask() && !filter.isTask()) {
+        	predicates.add(builder.equal(supportItemRoot.get("parentItem"), filter.getItemNumber())); 
+        }
         
 		
 		

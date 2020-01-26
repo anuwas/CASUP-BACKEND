@@ -40,23 +40,88 @@ public class SupportItemServiceHelper {
 		return supportItemRepository.findAll(new Specification<SupportItem>() {
 
 			@Override
-			public Predicate toPredicate(Root<SupportItem> root, CriteriaQuery<?> query,
-					CriteriaBuilder cb) {
+			public Predicate toPredicate(Root<SupportItem> supportItemRoot, CriteriaQuery<?> criteria,
+					CriteriaBuilder builder) {
 				
 				List<Predicate> predicates = new ArrayList<>();
 				
 				/*
 				 * if (filter.getItemCreatedDate() != null) {
 				 * predicates.add(cb.equal(root.get("designation"), filter.getDesignation())); }
-				 */
+				 
 
 				  if (!filter.getApplicationName().equals("All")) {
 				  predicates.add(cb.equal(root.get("applicationName"), filter.getApplicationName())); }
 				 
 				  if (!filter.getItemStatus().equals("All")) {
 					  predicates.add(cb.equal(root.get("itemStatus"), filter.getItemStatus())); }
+				  */
 				
-				return cb.and(predicates.toArray(new Predicate[0]));
+				  if(filter.isOpneDate() && filter.isCloseDate()) {		
+			        	predicates.add(builder.or(builder.and(builder.greaterThanOrEqualTo(supportItemRoot.get("itemCreatedDate"), filter.getItemFromDate()), builder.lessThanOrEqualTo(supportItemRoot.get("itemCreatedDate"), filter.getItemToDate())), 
+			        			builder.and(builder.greaterThanOrEqualTo(supportItemRoot.get("itemCloseDate"), filter.getItemFromDate()), builder.lessThanOrEqualTo(supportItemRoot.get("itemCloseDate"), filter.getItemToDate()))));
+			        }
+			        
+			        
+			        if(filter.isOpneDate() && !filter.isCloseDate()) {
+			        	predicates.add(builder.and(builder.greaterThanOrEqualTo(supportItemRoot.get("itemCreatedDate"), filter.getItemFromDate()), builder.lessThanOrEqualTo(supportItemRoot.get("itemCreatedDate"), filter.getItemToDate())));
+			        }
+			        
+			        if(!filter.isOpneDate() && filter.isCloseDate()) {
+			        	predicates.add(builder.and(builder.greaterThanOrEqualTo(supportItemRoot.get("itemCloseDate"), filter.getItemFromDate()), builder.lessThanOrEqualTo(supportItemRoot.get("itemCloseDate"), filter.getItemToDate())));
+			        }
+			        
+			        if (filter.getItemNumber() != 0) {
+						  predicates.add(builder.equal(supportItemRoot.get("itemNumber"), filter.getItemNumber())); 
+					}
+			        
+			        if (!filter.getApplicationName().equals("All")) {
+						  predicates.add(builder.equal(supportItemRoot.get("applicationName"), filter.getApplicationName())); 
+					}
+			        
+			        if (!filter.getItemStatus().equals("All")) {
+						  predicates.add(builder.equal(supportItemRoot.get("itemStatus"), filter.getItemStatus())); 
+					}
+			        
+			        if (filter.isBounce()) {
+						  predicates.add(builder.greaterThan(supportItemRoot.get("itemStatus"), 0)); 
+					}
+			        
+			        if (!filter.getItemType().equals("All")) {
+						  predicates.add(builder.equal(supportItemRoot.get("itemType"), filter.getItemType())); 
+					}
+			        
+			        if (!filter.getItemAssigned().equals("All")) {
+						  predicates.add(builder.equal(supportItemRoot.get("itemAssigned"), filter.getItemAssigned())); 
+					}
+			        
+			        if (!filter.getSla().equals("All")) {
+			        	switch(filter.getSla())	{
+			        	case "NonAged":
+			        		predicates.add(builder.equal(supportItemRoot.get("aged"), "N")); 
+			        		break;
+			        	case "Aged":
+			        		predicates.add(builder.equal(supportItemRoot.get("aged"), "Y")); 
+			        		break;
+			        	case "Primary":
+			        		predicates.add(builder.equal(supportItemRoot.get("primarySlaBreached"), "Y")); 
+			        		break;
+			        	case "Secondary":
+			        		predicates.add(builder.equal(supportItemRoot.get("secondarySlaBreached"), "Y")); 
+			        		break;
+			        	case "Tertiary":
+			        		predicates.add(builder.equal(supportItemRoot.get("tertirySlaBreached"), "Y")); 
+			        		break;
+			        	}
+					}
+			        
+
+			        criteria.where(builder.and(predicates.toArray( new Predicate[predicates.size()])));
+
+			        criteria.orderBy(builder.desc(supportItemRoot.get("itemCreatedTimestamp")));
+
+				
+				return builder.and(predicates.toArray(new Predicate[0]));
 			}
 			
 		});

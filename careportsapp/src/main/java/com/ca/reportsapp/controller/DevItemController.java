@@ -11,6 +11,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,7 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.ca.reportsapp.dao.domain.entity.DevItem;
-import com.ca.reportsapp.dao.domain.entity.SupportItem;
 import com.ca.reportsapp.dao.repository.DevItemRepository;
 import com.ca.reportsapp.service.DevtItemService;
 
@@ -71,6 +71,11 @@ public class DevItemController {
 	@GetMapping("/devitem/{devItemId}")
 	public DevItem retrieveItem(@PathVariable long devItemId) {
 		return devtItemService.getItemByID(devItemId);	
+	}
+	
+	@DeleteMapping("/devitem/{devItemId}")
+	public void deleteStudent(@PathVariable long devItemId) {
+		devtItemService.deleteItemById(devItemId);
 	}
 	
 	@PutMapping("/devitem/{devItemId}")

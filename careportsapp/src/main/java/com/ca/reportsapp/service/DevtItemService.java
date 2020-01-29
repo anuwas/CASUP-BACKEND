@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ca.reportsapp.dao.domain.entity.DevItem;
 import com.ca.reportsapp.dao.domain.entity.DevSprint;
-import com.ca.reportsapp.dao.domain.entity.SupportItem;
 /**
  * @author Anupam Biswas
  * 2020-01-12 00:59:04.518
@@ -23,4 +22,5 @@ public interface DevtItemService {
 	public Page<DevItem> getDevItemByRequest(String srcDevItem,int pageNumber); 
 	public DevItem saveItem(DevItem item);
 	public DevItem getItemByID(long devItemId);
+	public void deleteItemById(long devItemId);
 }

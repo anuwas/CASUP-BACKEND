@@ -16,7 +16,6 @@ import com.ca.reportsapp.dao.DevItemDAO;
 import com.ca.reportsapp.dao.DevSprintDAO;
 import com.ca.reportsapp.dao.domain.entity.DevItem;
 import com.ca.reportsapp.dao.domain.entity.DevSprint;
-import com.ca.reportsapp.dao.domain.entity.SupportItem;
 import com.ca.reportsapp.dto.DevItemSrcRequest;
 import com.ca.reportsapp.service.helper.DevItemServiceHelper;
 import com.google.gson.Gson;
@@ -74,6 +73,11 @@ public class DevtItemServiceImpl implements DevtItemService{
 			System.out.println("item not found");
 
 		return item.get();
+	}
+
+	@Override
+	public void deleteItemById(long devItemId) {
+		devItemDAO.deleteById(devItemId);
 	}
 
 }

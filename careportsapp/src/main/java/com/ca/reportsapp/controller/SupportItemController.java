@@ -127,6 +127,11 @@ public class SupportItemController {
 		return supportItemService.getActiveReportItemList();
 	}
 	
+	@GetMapping("/sup-item-active-problem-record-list")
+	public List<SupportItem> retrieveSupportItemActiveProblemRecord() {
+		return supportItemService.getActiveProblemRecordItemList();
+	}
+	
 	@GetMapping("/all-src-item-list/{page}/{srcsupitemstr}")
 	public Page<SupportItem> retrieveAdvanceSearchSupportItem(@PathVariable int page,@PathVariable String srcsupitemstr) {
 		return supportItemService.getAdvSrcSupportItem(srcsupitemstr,page);

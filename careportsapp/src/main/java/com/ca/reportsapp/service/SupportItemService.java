@@ -27,6 +27,7 @@ public interface SupportItemService {
 	public boolean updateItemById(long id);
 	public List<SupportItem> getActiveItemList();
 	public List<SupportItem> getActiveReportItemList();
+	public List<SupportItem> getActiveProblemRecordItemList();
 	public List<SupportItemActivity> getSupportItemActivityList(long itemId);
 	public SupportItemActivity saveSupportItemActivity(SupportItemActivity supportItemActivity);
 	public Page<SupportItem> getAdvSrcSupportItem(String advanceSearchSupportItem,int pageNumber);

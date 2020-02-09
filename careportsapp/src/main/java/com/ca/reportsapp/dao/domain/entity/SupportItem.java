@@ -118,6 +118,9 @@ public class SupportItem implements Serializable{
 	  @Column(name = "debt_remedial_mechanism")
 	  private String debtRemedialMechanism;
 	  
+	  @Column(name = "debt_comment")
+	  private String debtComment;
+	  
 	  @Temporal(TemporalType.TIMESTAMP)
 	  @Column(name = "modified_datetime",insertable = false, updatable = false)
 	  private java.util.Date modifiedDatetime;

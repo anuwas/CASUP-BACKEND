@@ -90,9 +90,17 @@ public class SupportItemServiceImpl implements SupportItemService{
 		itemList.add("Resolved");
 		itemList.add("Fulfilled");
 		itemList.add("Cancel");
-		
-		
 		return supportItemDAO.findByitemStatusNotInAndcronicalReportIn(itemList,"N");
+	}
+	
+	@Override
+	public List<SupportItem> getActiveProblemRecordItemList() {
+		List<String> itemList= new ArrayList<>();
+		itemList.add("Closed");
+		itemList.add("Resolved");
+		itemList.add("Fulfilled");
+		itemList.add("Cancel");
+		return supportItemDAO.findByProblemRecordStatusNotInAndcronicalReportIn(itemList,"N");
 	}
 
 	@Override
@@ -109,6 +117,7 @@ public class SupportItemServiceImpl implements SupportItemService{
 	public List<SupportItem> getActiveReportItemList() {
 		return supportItemDAO.findBycronicalReport("Y");
 	}
+	
 
 	@Override
 	public Page<SupportItem> getAdvSrcSupportItem(String advanceSearchSupportItem,int pageNumber) {

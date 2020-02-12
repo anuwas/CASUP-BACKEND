@@ -56,6 +56,9 @@ public class SupportItemServiceHelper {
 				  if (!filter.getItemStatus().equals("All")) {
 					  predicates.add(cb.equal(root.get("itemStatus"), filter.getItemStatus())); }
 				  */
+				if(filter.getSearchText()!=null && !filter.getSearchText().equals("")) {
+		        	predicates.add(builder.or(builder.like(supportItemRoot.get("itemSubject"), "%"+filter.getSearchText()+"%"),builder.like(supportItemRoot.get("itemDescription"), "%"+filter.getSearchText()+"%"),builder.like(supportItemRoot.get("resoluation"), "%"+filter.getSearchText()+"%")));
+		        }
 				
 				  if(filter.isOpneDate() && filter.isCloseDate()) {		
 			        	predicates.add(builder.or(builder.and(builder.greaterThanOrEqualTo(supportItemRoot.get("itemCreatedDate"), filter.getItemFromDate()), builder.lessThanOrEqualTo(supportItemRoot.get("itemCreatedDate"), filter.getItemToDate())), 
@@ -141,6 +144,9 @@ public class SupportItemServiceHelper {
 		 * predicates.add(builder.like(builder.lower(booksRoot.get("name")), "%" +
 		 * params.getName().toLowerCase() + "%"));
 		 */
+        if(filter.getSearchText()!=null && !filter.getSearchText().equals("")) {
+        	predicates.add(builder.or(builder.like(supportItemRoot.get("itemSubject"), "%"+filter.getSearchText()+"%"),builder.like(supportItemRoot.get("itemDescription"), "%"+filter.getSearchText()+"%"),builder.like(supportItemRoot.get("resoluation"), "%"+filter.getSearchText()+"%")));
+        }
         /*
          * Mysql so jali it dosent suppot inclusive between
         if(filter.isOpneDate() && filter.isCloseDate()) {		

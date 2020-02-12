@@ -34,5 +34,6 @@ public class AdvanceSearchSupportItem {
     private String sla;
     private String debt;
     private int priority;
+    private String searchText;
 
 }

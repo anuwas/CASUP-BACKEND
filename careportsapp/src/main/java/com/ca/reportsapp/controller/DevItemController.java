@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.ca.reportsapp.controller;
 
 import java.util.Optional;

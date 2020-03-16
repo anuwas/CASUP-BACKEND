@@ -3,7 +3,6 @@
  */
 package com.ca.reportsapp.dto;
 
-import java.util.Date;
 
 import org.springframework.stereotype.Component;
 

@@ -9,7 +9,6 @@ import org.springframework.data.domain.Page;
 
 import com.ca.reportsapp.dao.domain.entity.SupportItem;
 import com.ca.reportsapp.dao.domain.entity.SupportItemActivity;
-import com.ca.reportsapp.dto.AdvanceSearchSupportItem;
 
 
 

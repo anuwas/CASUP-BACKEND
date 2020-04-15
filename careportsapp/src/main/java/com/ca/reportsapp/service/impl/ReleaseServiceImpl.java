@@ -52,7 +52,7 @@ public class ReleaseServiceImpl implements ReleaseService{
 
 	@Override
 	public void deleteReleaseItemById(long releaseItemId) {
-		// TODO Auto-generated method stub
+		releasesDAO.deleteById(releaseItemId);
 		
 	}
 
